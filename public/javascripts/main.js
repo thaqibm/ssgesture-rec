@@ -68,7 +68,6 @@ function draw() {
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(currX, currY);
-    console.log(pointLst);
     ctx.strokeStyle = x;
     ctx.lineWidth = y;
     ctx.stroke();
@@ -189,5 +188,18 @@ function findxy(res, e) {
             draw();
         }
     }
+}
+
+function get_pts(){
+    var x = document.getElementById("points").value; 
+    console.log(x);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "./users", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        value: x
+    }));
+    return x; 
+    
 }
 
