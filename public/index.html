@@ -1,0 +1,36 @@
+
+ <html>
+ 
+	<style>
+	.toolbarbutton {
+		width: 50px;
+	}
+	#left {
+	width: 750px;
+	float:left;
+	}
+	</style>
+ 
+ <script src="javascripts/main.js"></script>
+	
+	
+    <body onload="init()">
+	<div id="intro" style="position:relative;width:750px">
+			<h2>LaTeX recognizer</h2>
+			
+	</div>
+	<div id="sketch" style="position:relative"> 
+        <div style="position:absolute;top:30;left:45;">Draw With Mouse Here</div>
+		<canvas id="can" width="400" height="400" style="position:absolute;top:50;left:45;border:2px solid;"></canvas>
+		<div style="position:absolute;top:500;left:45;"><x, y> Mouse Points</div>
+        <textarea readonly id="points" name="points" rows="30" cols="30" style="position:absolute;top:495;left:45;"></textarea>
+		<div style="position:absolute;top:30;left:500;">Thumbnail (right click to copy)</div>
+        <img id="canvasimg" style="position:absolute;top:50;left:500;" width="100 style="display:none;">
+		
+       
+        <input type="button" class="toolbarbutton" value="copy" id="btn" size="50" onclick="copy()" style="position:absolute;top:475;left:50;">
+        <input type="button" class="toolbarbutton" value="paste" id="pst" size="23" onclick="paste()" style="position:absolute;top:475;left:100;">
+        <input type="button" class="toolbarbutton" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:475;left:150;">
+		</div>
+    </body>
+    </html>
