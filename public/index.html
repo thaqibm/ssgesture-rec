@@ -9,14 +9,28 @@
 	width: 750px;
 	float:left;
 	}
+	.button {
+		background-color: white;
+		border: 2px solid #555555;
+		color: black;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 12px;
+	}
 	</style>
  
  <script src="javascripts/main.js"></script>
  <script src="javascripts/xhs.js" defer></script>
-
+ <style>
+	body, h1, h2, h3, h4, h5, h6  {
+	  font-family: Arial, Helvetica, sans-serif ;
+	}
+</style>
     <body onload="init()">
 	<div id="intro" style="position:relative;width:750px">
-			<h2>LaTeX recognizer</h2>
+			<h2>Single Stroke Gesture recognizer</h2>
 			
 	</div>
 	<div id="sketch" style="position:relative"> 
@@ -24,6 +38,12 @@
 		<canvas id="can" width="400" height="400" style="position:absolute;top:50;left:45;border:2px solid;"></canvas>
 		<div style="position:absolute;top:500;left:45;"><x, y> Mouse Points</div>
 		<div style="position:absolute;top:30;left:500;">Thumbnail (right click to copy)</div>
+		<div style="position:absolute;top:150;left:500;">
+			<h1 id="sym", style="color: darkblue;">Result: </h1>
+			<button id="get-btn" class="button">Recognise</button>
+
+		</div>
+		
         <img id="canvasimg" style="position:absolute;top:50;left:500;" width="100 style="display:none;">
 		
        
@@ -31,8 +51,7 @@
         <input type="button" class="toolbarbutton" value="paste" id="pst" size="23" onclick="paste()" style="position:absolute;top:475;left:100;">
 		<input type="button" class="toolbarbutton" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:475;left:150;">
 		<textarea readonly id="points" name="points" rows="30" cols="30" style="position:absolute;top:495;left:45;"></textarea>
-		<button id="get-btn"  style="position:absolute;top:475;left:200;">GET Data</button>
-
+		
 		</div>
     </body>
     </html>

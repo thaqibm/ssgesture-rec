@@ -42,7 +42,11 @@ const sendData = () => {
     const data = {
         data: points
     }
-    SendReq('POST', './users', data).then(res=>console.log(res)).catch(err => console.log(err)); 
+    const result_text = document.getElementById("sym")
+    if (result_text != "") {
+		SendReq('POST', './users', data).then(res=>{result_text.innerHTML = "Result: " + res})
+		.catch(err => result_text.innerHTML = "Result: Error!"); 
+	}
 }
 
 getBtn.addEventListener('click', sendData); 

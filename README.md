@@ -1,0 +1,1 @@
+# Single Stroke Gesture recognizer

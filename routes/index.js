@@ -27,9 +27,8 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.join('../public/index.html'));
 });
 router.post('/users', function(req, res, next) {
-	console.log(req.body.data); 
-	const gesture = StrToArr(req.body.data); 
 	
+	const gesture = StrToArr(req.body.data); 
 	res.send(JSON.stringify(rec.five_point_rec(gesture))); 
 
 });
