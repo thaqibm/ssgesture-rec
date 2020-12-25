@@ -190,16 +190,5 @@ function findxy(res, e) {
     }
 }
 
-function get_pts(){
-    var x = document.getElementById("points").value; 
-    console.log(x);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "./users", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        value: x
-    }));
-    return x; 
-    
-}
+
 

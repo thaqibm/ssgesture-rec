@@ -6,7 +6,7 @@ let MAX_Y = 500;
 let MIN_X = 0; 
 let MIN_Y = 0; 
 
-console.log(data);
+//console.log(data);
 
 var testArr = [[3,3], [1,1],[1,2]];
 var diamond = [[100,0], [200, 100], [100, 200], [0,100],[100,0]]; 
@@ -112,23 +112,23 @@ var geometric_5match = (G1, G2) =>  Gesture_distance(normalize(FiveSample(G1)), 
 
 const testGesture = [[237,62],[234,62],[229,60],[225,60],[217,58],[208,57],[198,56],[188,56],[180,56],[172,57],[164,60],[158,62],[150,64],[140,69],[136,72],[133,75],[127,82],[122,89],[119,95],[116,108],[116,117],[116,127],[117,141],[120,150],[123,160],[127,168],[135,179],[142,186],[149,194],[162,202],[170,206],[179,208],[196,210],[206,210],[215,208],[237,205],[247,201],[258,197],[265,193],[267,191],[268,191],[269,190],[269,190],[269,189],[269,187],[269,186],[269,184],[268,180],[267,179],[267,177],[266,177],[265,176],[265,176]]; 
 
-console.log(geometric_5match(testGesture,data.Datbase[0].template)); 
-console.log(geometric_5match(testGesture,data.Datbase[1].template)); 
-console.log(geometric_5match(testGesture,data.Datbase[2].template)); 
-console.log(geometric_5match(testGesture,data.Datbase[3].template)); 
-
-function five_point_rec(G){
-    var dist_list = data.Datbase.map((x) => [x.letter, geometric_5match(G, x.template)]); 
-    
-    var curr_min = dist_list[0]; 
-    for (let index = 0; index < dist_list.length; index++) {
-        if (dist_list[index][1] < curr_min[1]) {
-            curr_min = dist_list[index]; 
+//console.log(geometric_5match(testGesture,data.Datbase[0].template)); 
+//console.log(geometric_5match(testGesture,data.Datbase[1].template)); 
+//console.log(geometric_5match(testGesture,data.Datbase[2].template)); 
+//console.log(geometric_5match(testGesture,data.Datbase[3].template)); 
+module.exports = {
+    five_point_rec: function (G){
+                var dist_list = data.Datbase.map((x) => [x.letter, geometric_5match(G, x.template)]);
+                 var curr_min = dist_list[0];
+                 for (let index = 0; index < dist_list.length; index++) {
+                     if (dist_list[index][1] < curr_min[1]) {
+                         curr_min = dist_list[index];
+                    }
         }
+        return curr_min[0]; 
     }
-    return curr_min[0]; 
 }
-console.log(five_point_rec(testGesture)); 
+// console.log(five_point_rec(testGesture)); 
 
 
     

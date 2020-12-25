@@ -12,8 +12,8 @@
 	</style>
  
  <script src="javascripts/main.js"></script>
-	
-	
+ <script src="javascripts/xhs.js" defer></script>
+
     <body onload="init()">
 	<div id="intro" style="position:relative;width:750px">
 			<h2>LaTeX recognizer</h2>
@@ -30,10 +30,8 @@
         <input type="button" class="toolbarbutton" value="copy" id="btn" size="50" onclick="copy()" style="position:absolute;top:475;left:50;">
         <input type="button" class="toolbarbutton" value="paste" id="pst" size="23" onclick="paste()" style="position:absolute;top:475;left:100;">
 		<input type="button" class="toolbarbutton" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:475;left:150;">
-		<form action="/users" method="post">
-			<textarea readonly id="points" name="points" rows="30" cols="30" style="position:absolute;top:495;left:45;"></textarea>
-			<input type="submit", onclick="get_pts()" style="position:absolute;top:475;left:200;"/>
-    	</form>
+		<textarea readonly id="points" name="points" rows="30" cols="30" style="position:absolute;top:495;left:45;"></textarea>
+		<button id="get-btn"  style="position:absolute;top:475;left:200;">GET Data</button>
 
 		</div>
     </body>
