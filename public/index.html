@@ -31,7 +31,6 @@
     <body onload="init()">
 	<div id="intro" style="position:relative;width:750px">
 			<h2>Single Stroke Gesture recognizer</h2>
-			
 	</div>
 	<div id="sketch" style="position:relative"> 
         <div style="position:absolute;top:30;left:45;">Draw With Mouse Here</div>
@@ -40,6 +39,8 @@
 		<div style="position:absolute;top:30;left:500;">Thumbnail (right click to copy)</div>
 		<div style="position:absolute;top:150;left:500;">
 			<h1 id="sym", style="color: darkblue;">Result: </h1>
+			<input type="range" name="rangeInput" min="0" max="100" onchange="updateVal(this.value);">
+			<p id="k"></p>
 			<button id="get-btn" class="button">Recognise</button>
 
 		</div>

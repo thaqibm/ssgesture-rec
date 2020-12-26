@@ -37,10 +37,19 @@ function get_pts(){
     return x;     
 }
 
+function updateVal(k){
+    const txt = document.getElementById("k"); 
+    txt.innerHTML = "K= " + k; 
+}
+
+const getK = () => document.getElementById("k").value; 
+
 const sendData = () => { 
     const points = get_pts(); 
+    const k = getK(); 
     const data = {
-        data: points
+        data: points, 
+        k: k
     }
     const result_text = document.getElementById("sym")
     if (result_text != "") {
