@@ -1,3 +1,4 @@
+// Sample Gesture database
 var data = require('../data/gesture_templates.json'); 
 
 // Constants for max/min coordinates. 
@@ -6,22 +7,22 @@ let MAX_Y = 500;
 let MIN_X = 0; 
 let MIN_Y = 0; 
 
-//console.log(data);
+
 
 var testArr = [[3,3], [1,1],[1,2]];
 var diamond = [[100,0], [200, 100], [100, 200], [0,100],[100,0]]; 
-// REC Functions. 
+
+/* 
+Functions for manupulating points. 
+*/ 
 var getX = (pt) => pt[0];
 var getY = (pt) => pt[1];
-
 
 // Translate Gesture, translates a gesture G by x-offset and y-offset
 var translate = (G,x,y) => G.map((pt)=>[getX(pt)+x, getY(pt)+y]);
 
-
 // Scale Gesture, scales a gesture by x in x direction and y in y direction
 var scale = (G,x,y) => G.map((pt)=>[getX(pt)*x, getY(pt)*y]);
-
 
 // Bounding box, get the bounding box for gesture G. (Difference of max and min coordinates). 
 var Bbox = (G) =>{
@@ -37,7 +38,6 @@ var Bbox = (G) =>{
 
 // Point Dist: 
 var pointDist = (a,b) => Math.sqrt((getX(b)-getX(a))**2 + (getY(b)-getY(a))**2); 
-    
 
 // Gesture Len, get the length of the gesture.  
 function GestureLength(G){
@@ -50,19 +50,8 @@ function GestureLength(G){
     }
 }
 
-
-var getPts = (G, Lst) => Lst.map((i)=> G[i]);   
-
-// Five Sample, get the the first, n/4th, n/2th, 3n/4th, and last point.
-var FiveSample = (G) => {
-    let n = G.length; 
-    return getPts(G, [0, Math.floor(0.25*n), Math.floor(0.5*n), Math.floor(0.75*n), n-1]); 
-}
-
-
 // Move gesture to Origin and scale by sx,sy
 var MoveAndScale = (G,sx,sy) => scale(translate(G, -1*getX(Bbox(G)[0]), -1*getY(Bbox(G)[0])), sx, sy); 
-
 
 // Standard Size of Samples: 
 let minW = 30; 
@@ -94,6 +83,37 @@ function normalize(G){
     }
 }
 
+
+
+// Sampling functions
+
+var getPts = (G, Lst) => Lst.map((i)=> G[i]);   
+
+// Five Sample, get the the first, n/4th, n/2th, 3n/4th, and last point.
+var FiveSample = (G,k) => {
+    let n = G.length; 
+    return getPts(G, [0, Math.floor(0.25*n), Math.floor(0.5*n), Math.floor(0.75*n), n-1]); 
+}
+
+// Gets k sample points from gesture
+var sub_sample = (G,k) => {
+    const len = G.length;
+    var index_lst = []; 
+
+    for (let i = 0; i < k; i++) {
+        if (i === k-1) {
+			index_lst.push(len-1); 
+		}
+		else{
+			var index = Math.floor((i*len)*1/(k-1));
+			index_lst.push(index); 
+		}
+    }
+    return getPts(G,index_lst); 
+}
+
+
+
 /**Finds the distance bewteen 2 gestures G1,G2*/
 // requires: |G1| = |G2|
 function Gesture_distance(G1,G2){
@@ -107,28 +127,41 @@ function Gesture_distance(G1,G2){
 }
 
 
+/*Matching Functions*/
 // Basic 5 sample matching function 
-var geometric_5match = (G1, G2) =>  Gesture_distance(normalize(FiveSample(G1)), normalize(FiveSample(G2)))/5; 
+var geometric_5match = (G1, G2) =>  matching_engine(G1, G2, Gesture_distance, FiveSample, 5, normalize); 
 
-const testGesture = [[237,62],[234,62],[229,60],[225,60],[217,58],[208,57],[198,56],[188,56],[180,56],[172,57],[164,60],[158,62],[150,64],[140,69],[136,72],[133,75],[127,82],[122,89],[119,95],[116,108],[116,117],[116,127],[117,141],[120,150],[123,160],[127,168],[135,179],[142,186],[149,194],[162,202],[170,206],[179,208],[196,210],[206,210],[215,208],[237,205],[247,201],[258,197],[265,193],[267,191],[268,191],[269,190],[269,190],[269,189],[269,187],[269,186],[269,184],[268,180],[267,179],[267,177],[266,177],[265,176],[265,176]]; 
+// Matching based on k points
+var geometric_kmatch = (G1, G2, k) => matching_engine(G1, G2, Gesture_distance,sub_sample, k, normalize); 
 
-//console.log(geometric_5match(testGesture,data.Datbase[0].template)); 
-//console.log(geometric_5match(testGesture,data.Datbase[1].template)); 
-//console.log(geometric_5match(testGesture,data.Datbase[2].template)); 
-//console.log(geometric_5match(testGesture,data.Datbase[3].template)); 
-module.exports = {
-    five_point_rec: function (G){
-                var dist_list = data.Datbase.map((x) => [x.letter, geometric_5match(G, x.template)]);
-                 var curr_min = dist_list[0];
-                 for (let index = 0; index < dist_list.length; index++) {
-                     if (dist_list[index][1] < curr_min[1]) {
-                         curr_min = dist_list[index];
-                    }
-        }
-        return curr_min[0]; 
-    }
+
+
+function recognizer_engine(Gesture, metric,dataset,k){
+	var dist_list = dataset.Datbase.map((x) => [x.letter, metric(Gesture, x.template,k)]);
+	var curr_min = dist_list[0];
+
+	for (let index = 0; index < dist_list.length; index++) {
+		if (dist_list[index][1] < curr_min[1]) {
+			curr_min = dist_list[index];
+		}
+	}
+	return curr_min[0];
 }
-// console.log(five_point_rec(testGesture)); 
+
+function matching_engine(Gesture1, Gesture2, distance, sampling,k, normalize){
+		return distance(normalize(sampling(Gesture1,k)), normalize(sampling(Gesture2,k)))/k; 
+}
 
 
-    
+
+module.exports = {
+    five_point_rec: function (G,k){
+        console.log(k); 
+		return recognizer_engine(G,geometric_5match, data,k); 
+	},
+
+	k_point_rec: function(G,k){
+		return recognizer_engine(G, geometric_kmatch, data,k); 
+	}
+}
+
