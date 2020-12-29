@@ -30,7 +30,9 @@ router.post('/users', function(req, res, next) {
 	
 	const gesture = StrToArr(req.body.data); 
 	const k = parseInt(req.body.k); 
-	res.send(JSON.stringify(rec.five_point_rec(gesture,5))); 
+	console.log(k); 
+	const sym = JSON.stringify(rec.k_pt_rec(gesture,parseInt(k)));
+	res.send(sym); 
 });
 
 

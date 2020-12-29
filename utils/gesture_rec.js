@@ -137,31 +137,32 @@ var geometric_kmatch = (G1, G2, k) => matching_engine(G1, G2, Gesture_distance,s
 
 
 function recognizer_engine(Gesture, metric,dataset,k){
-	var dist_list = dataset.Datbase.map((x) => [x.letter, metric(Gesture, x.template,k)]);
+    var dist_list = dataset.Datbase.map((x) =>{ return [x.letter, metric(Gesture, x.template,k)]});
+
 	var curr_min = dist_list[0];
 
 	for (let index = 0; index < dist_list.length; index++) {
 		if (dist_list[index][1] < curr_min[1]) {
 			curr_min = dist_list[index];
 		}
-	}
+    }
+   // console.log(dist_list); 
 	return curr_min[0];
 }
 
 function matching_engine(Gesture1, Gesture2, distance, sampling,k, normalize){
 		return distance(normalize(sampling(Gesture1,k)), normalize(sampling(Gesture2,k)))/k; 
 }
-
-
+function five_point_rec(G,k){
+    return recognizer_engine(G,geometric_5match, data,k); 
+}
+function k_point_rec(G,k){
+    return recognizer_engine(G,geometric_kmatch,data,k); 
+}
 
 module.exports = {
-    five_point_rec: function (G,k){
-        console.log(k); 
-		return recognizer_engine(G,geometric_5match, data,k); 
-	},
+    five_pt_rec:  five_point_rec,
+    k_pt_rec: k_point_rec
+};
 
-	k_point_rec: function(G,k){
-		return recognizer_engine(G, geometric_kmatch, data,k); 
-	}
-}
 

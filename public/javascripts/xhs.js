@@ -1,6 +1,7 @@
 // Managing HTTP requests. 
 
 
+
 const getBtn = document.getElementById('get-btn');
 
 // Wrapper for requests: 
@@ -39,10 +40,18 @@ function get_pts(){
 
 function updateVal(k){
     const txt = document.getElementById("k"); 
-    txt.innerHTML = "K= " + k; 
+    txt.innerHTML ="K = "+ k; 
 }
 
-const getK = () => document.getElementById("k").value; 
+const getK = () => {
+	const x = document.getElementById("k").innerText.slice(3); 
+	if(x!=""){
+		return x;
+	}
+	else{
+		return 5;
+	}
+} 
 
 const sendData = () => { 
     const points = get_pts(); 
@@ -53,7 +62,7 @@ const sendData = () => {
     }
     const result_text = document.getElementById("sym")
     if (result_text != "") {
-		SendReq('POST', './users', data).then(res=>{result_text.innerHTML = "Result: " + res})
+		SendReq('POST', './users', data).then(res=>{result_text.innerHTML = "Result: " + res;})
 		.catch(err => result_text.innerHTML = "Result: Error!"); 
 	}
 }
