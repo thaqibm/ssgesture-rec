@@ -33,6 +33,30 @@ function init() {
     w = canvas.width;
     h = canvas.height;
 
+    // Touch
+    canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+        findxy('move',mouseEvent);
+      }, false);
+      canvas.addEventListener("touchstart", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+        findxy('down',mouseEvent);
+      }, false);
+      
+      
+      
+
+    // MOUSE
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
     }, false);
