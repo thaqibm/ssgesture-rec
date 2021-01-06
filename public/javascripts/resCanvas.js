@@ -173,7 +173,7 @@ function getTouchPos(e) {
 
 function create_image() {
     document.getElementById("canvasimg").style.border = "2px solid";
-    var dataURL = canvas.toDataURL();
+	var dataURL = canvas.toDataURL();
     document.getElementById("canvasimg").src = dataURL;
     document.getElementById("canvasimg").style.display = "inline";
 }
