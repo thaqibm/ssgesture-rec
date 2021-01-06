@@ -5,7 +5,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="https://depts.washington.edu/acelab/proj/dollar/$1.png">
 
 	<title>SS</title>
 	<style>
@@ -34,6 +33,8 @@
 			width:230px;
 		}
 	</style>
+	<script src="./javascripts/main.js"></script>
+
 	<script>
 		var slider = document.getElementById("kRange");
 		function update(val){
@@ -42,6 +43,7 @@
 		}
 	</script>
 	<script src="./javascripts/resCanvas.js"></script>
+	
 </head>
 <body onload="init()">
 	<div class="container">
@@ -83,7 +85,7 @@
 				</canvas>
 			</div>
 			<div class="col-12 col-md-6 ">
-				<h1 class="rec">
+				<h1 id="sym" class="rec">
 					Symbol: NONE
 				</h1>
 				<form class="row g-3 needs-validation" novalidate>
@@ -136,8 +138,8 @@
 					  </div>
 					</div>
 					<div class="col-6">
-					  <button class="btn btn-primary" type="submit">Recognize</button>
-					  <button class="btn btn-primary" type="submit" onclick="clearCanvas(canvas,ctx);">Clear</button>
+					  <button id='get-btn' type="button" class="btn btn-primary">Recognize</button>
+					  <button class="btn btn-danger" type="button" onclick="clearCanvas(canvas,ctx);">Clear</button>
 					</div>	
 				  </form>	
 			</div>
