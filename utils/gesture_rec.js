@@ -146,7 +146,6 @@ function recognizer_engine(Gesture, metric,dataset,k){
 			curr_min = dist_list[index];
 		}
     }
-   // console.log(dist_list); 
 	return curr_min[0];
 }
 

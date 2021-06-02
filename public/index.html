@@ -56,20 +56,17 @@
 			  <div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				  <li class="nav-item">
-					<a class="nav-link" href="#">Github Repo</a>
+					<a class="nav-link" href="https://github.com/thaqib0437/ssgesture-rec" target="_blank">Github Repo</a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="#">Add New Symbol</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" aria-current="page" href="#">List of All Symbols</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" aria-current="page" href="#">Info</a>
+					<a class="nav-link" aria-current="page" href="/allsymbols">List of All Symbols</a>
 				  </li>
 				</ul>
 				<span class="navbar-text">
-				  : : thaqib0437
+				  <a class="nav-link" href="https://github.com/thaqib0437/" target="_blank">: :  thaqib0437</a>
 				</span>
 			  </div>
 			</div>
@@ -94,18 +91,6 @@
 						<p id="K">K=5</p>
 						<input type="range" class="form-range" min="5" max="100" id="kRange" value="5" onchange="update(this.value);" required/>
 					</div>
-					<div class="col-md-3">
-						<label for="validationCustom04" class="form-label">Input</label>
-						<select class="form-select" id="validationCustom04" required>
-						  <option selected value="">Single Stroke</option>
-						  <option disabled>Multi Stroke</option>
-						</select>
-						<div class="invalid-feedback">
-						  Please select a valid state.
-						</div>
-					  </div>
-  
-					<div class="col-md-3">
 					  <label for="validationCustom04" class="form-label">Sampling</label>
 					  <select class="form-select" id="validationCustom04" required>
 						<option selected value="">K-sampling</option>
@@ -128,10 +113,6 @@
 					</div>
 					<div class="col-12">
 					  <div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="invalidCheck" disabled>
-						<label class="form-check-label" for="invalidCheck">
-						  Tensorflow?
-						</label>
 						<div class="invalid-feedback">
 						  You must agree before submitting.
 						</div>
@@ -146,23 +127,20 @@
 		</div>
 		<div class="row">
 			
-			<div class="col-12 col-md-6">
+			<div class="col-md-6 offset-md-2">
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">Points</label>
 					<textarea readonly class="form-control" id="points" rows="10"></textarea>
 				  </div>
 				
 			</div> 
-			<div class="col-12 col-md-6">
+			<div class="col-md-2">
 				<p>
 					Preview Image
 				</p>
 				<img id="canvasimg" width="100 style="display:none;">
 			</div>
 		</div>
-		<p class="text-danger">
-			Disabled Features are under development
-		</p>
 	</div>
 
 </body>

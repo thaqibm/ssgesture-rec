@@ -2,11 +2,38 @@
 
 
 var getBtn;
-
+var drawdiv;
+var canvas;
+var txt;
 document.addEventListener('DOMContentLoaded', start, false);
 function start(){
   getBtn = document.getElementById("get-btn")
   getBtn.addEventListener('click',sendData,false); 
+
+  drawdiv = document.getElementById('sketch');
+	canvas = document.getElementById('sketchpad');
+	txt = document.getElementById('points');
+
+
+  var r = document.getElementById("kRange");
+  r.onchange((e) => {
+    sendData();
+  })
+
+	// If the browser supports the canvas tag, get the 2d drawing context for this canvas
+	if (canvas.getContext)
+		ctx = canvas.getContext('2d');
+
+	// Check that we have a valid context to draw on/with before adding event handlers
+	if (ctx) {
+		// React to mouse events on the canvas, and mouseup on the entire document
+		window.addEventListener('mouseout', (e) => sendData(), false);
+		
+		// React to touch events on the canvas
+		canvas.addEventListener('touchend', sendData, false);
+		
+
+	}
 }
 
 
